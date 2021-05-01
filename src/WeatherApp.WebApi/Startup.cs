@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WeatherApp.BusinessLayer.Interfaces;
+using WeatherApp.WebApi.Shared;
 
 namespace WeatherApp.WebApi
 {
@@ -12,6 +14,9 @@ namespace WeatherApp.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore();
+            services.AddHttpClient();
+
+            services.AddTransient<IAppSettingsManager, AppSettingsManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

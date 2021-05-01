@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WeatherApp.BusinessLayer.Shared;
 
 namespace WeatherApp.BusinessLayer.Interfaces.ServiceLayer
 {
     public interface IForecastDataFetcher
     {
-        IEnumerable<ForecastData> FetchDataByCityName(string cityName);
-        IEnumerable<ForecastData> FetchDataByZipCode(string zipCode);
+        Task<IEnumerable<ForecastData>> FetchDataByCityNameAsync(string cityName);
+        Task<IEnumerable<ForecastData>> FetchDataByZipCodeAsync(string zipCode);
     }
 }
