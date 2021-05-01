@@ -4,6 +4,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.WebApi", "Weathe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.WebApiTests", "WeatherApp.WebApiTests\WeatherApp.WebApiTests.csproj", "{350B205B-221D-4689-9C1B-4B0E872F0B8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.ServiceLayer", "WeatherApp.ServiceLayer\WeatherApp.ServiceLayer.csproj", "{27BAAACD-9D1E-41B2-906F-9B48906112FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.BusinessLayer", "WeatherApp.BusinessLayer\WeatherApp.BusinessLayer.csproj", "{82A63975-6ABD-4817-B7E2-ACB83B94328A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{88CC6FFA-76F6-43D5-AF39-CD561E593E7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.ServiceLayerTests", "WeatherApp.ServiceLayerTests\WeatherApp.ServiceLayerTests.csproj", "{2D80E4A2-5739-4495-BBE5-0C45F06FE904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +26,21 @@ Global
 		{350B205B-221D-4689-9C1B-4B0E872F0B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{350B205B-221D-4689-9C1B-4B0E872F0B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{350B205B-221D-4689-9C1B-4B0E872F0B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27BAAACD-9D1E-41B2-906F-9B48906112FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27BAAACD-9D1E-41B2-906F-9B48906112FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27BAAACD-9D1E-41B2-906F-9B48906112FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27BAAACD-9D1E-41B2-906F-9B48906112FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A63975-6ABD-4817-B7E2-ACB83B94328A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A63975-6ABD-4817-B7E2-ACB83B94328A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A63975-6ABD-4817-B7E2-ACB83B94328A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A63975-6ABD-4817-B7E2-ACB83B94328A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D80E4A2-5739-4495-BBE5-0C45F06FE904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D80E4A2-5739-4495-BBE5-0C45F06FE904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D80E4A2-5739-4495-BBE5-0C45F06FE904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D80E4A2-5739-4495-BBE5-0C45F06FE904}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{350B205B-221D-4689-9C1B-4B0E872F0B8E} = {88CC6FFA-76F6-43D5-AF39-CD561E593E7B}
+		{2D80E4A2-5739-4495-BBE5-0C45F06FE904} = {88CC6FFA-76F6-43D5-AF39-CD561E593E7B}
 	EndGlobalSection
 EndGlobal
