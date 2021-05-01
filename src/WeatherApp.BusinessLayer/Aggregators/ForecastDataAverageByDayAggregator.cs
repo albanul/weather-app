@@ -6,7 +6,7 @@ using WeatherApp.BusinessLayer.Shared;
 
 namespace WeatherApp.BusinessLayer.Aggregators
 {
-    public class ForecastDataAverageByDayAggregator : IForecastDataAggregator
+    public class ForecastDataAverageByDayAggregator : IForecastDataAverageByDayAggregator
     {
         public IEnumerable<ForecastData> Aggregate(IEnumerable<ForecastData> data)
         {

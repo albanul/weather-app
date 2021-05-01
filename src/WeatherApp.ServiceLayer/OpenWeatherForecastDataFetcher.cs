@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using WeatherApp.BusinessLayer.Interfaces;
 using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
 using WeatherApp.BusinessLayer.Interfaces.ServiceLayer;
 using WeatherApp.BusinessLayer.Shared;

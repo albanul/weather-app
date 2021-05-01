@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\WeatherApp.BusinessLayer\WeatherApp.BusinessLayer.csproj" />
+      <ProjectReference Include="..\WeatherApp.ServiceLayer\WeatherApp.ServiceLayer.csproj" />
     </ItemGroup>
 
 </Project>
