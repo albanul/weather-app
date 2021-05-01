@@ -32,21 +32,16 @@ namespace WeatherApp.ServiceLayer
 
         public async Task<IEnumerable<ForecastData>> FetchDataByCityNameAsync(string cityName)
         {
-            OpenWeatherApiUrlBuilder urlBuilder = new OpenWeatherApiUrlBuilder()
+            string url = new OpenWeatherApiUrlBuilder()
                 .WithCityName(cityName)
-                .WithApiKey(ApiKey);
-
-            string url = urlBuilder.Build();
+                .WithApiKey(ApiKey)
+                .Build();
 
             HttpResponseMessage response = await _httpClient.GetAsync(url);
 
             string json = await response.Content.ReadAsStringAsync();
 
-            var apiResponse = JsonConvert.DeserializeObject<OpenWeatherApiResponseModel>(json);
-
-            List<ForecastData> forecastData = apiResponse?.Forecasts
-                .Select(x => _forecastDataFactory.CreateFromOpenWeatherResponse(x))
-                .ToList();
+            List<ForecastData> forecastData = ParseForecastData(json);
 
             return forecastData;
         }
@@ -54,6 +49,16 @@ namespace WeatherApp.ServiceLayer
         public async Task<IEnumerable<ForecastData>> FetchDataByZipCodeAsync(string zipCode)
         {
             return await Task.FromResult(Enumerable.Empty<ForecastData>());
+        }
+
+        private List<ForecastData> ParseForecastData(string json)
+        {
+            var apiResponse = JsonConvert.DeserializeObject<OpenWeatherApiResponseModel>(json);
+
+            List<ForecastData> forecastData = apiResponse?.Forecasts
+                .Select(x => _forecastDataFactory.CreateFromOpenWeatherResponse(x))
+                .ToList();
+            return forecastData;
         }
     }
 }
