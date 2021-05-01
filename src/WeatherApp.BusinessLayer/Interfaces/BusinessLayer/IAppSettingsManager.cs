@@ -1,4 +1,4 @@
-namespace WeatherApp.BusinessLayer.Interfaces
+namespace WeatherApp.BusinessLayer.Interfaces.BusinessLayer
 {
     public interface IAppSettingsManager
     {

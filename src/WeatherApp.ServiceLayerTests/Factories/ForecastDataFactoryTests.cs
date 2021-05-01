@@ -3,7 +3,7 @@ using NUnit.Framework;
 using WeatherApp.BusinessLayer.Shared;
 using WeatherApp.ServiceLayer.Factories;
 using WeatherApp.ServiceLayer.Models;
-using WeatherApp.ServiceLayerTests.Shared;
+using WeatherApp.Testing.EqualityComparers;
 
 namespace WeatherApp.ServiceLayerTests.Factories
 {

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using WeatherApp.BusinessLayer.Interfaces;
+using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
 
 namespace WeatherApp.ServiceLayerTests.Shared
 {

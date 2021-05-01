@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using WeatherApp.BusinessLayer.Shared;
 
-namespace WeatherApp.ServiceLayerTests.Shared
+namespace WeatherApp.Testing.EqualityComparers
 {
     public class ForecastDataEqualityComparer : IEqualityComparer<ForecastData>
     {
