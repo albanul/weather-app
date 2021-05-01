@@ -17,7 +17,7 @@ namespace WeatherApp.WebApiTests.Controllers
             HttpClient client = factory.CreateClient();
 
             // act
-            HttpResponseMessage response = await client.GetAsync("api/weather");
+            HttpResponseMessage response = await client.GetAsync("api/weather/forecast");
 
             // assert
             Assert.That(response, Is.Not.Null);
