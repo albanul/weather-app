@@ -6,7 +6,6 @@ namespace WeatherApp.ServiceLayer.Factories
 {
     public class ForecastDataFactory : IForecastDataFactory
     {
-        // TODO ALBA: cover with tests
         public ForecastData CreateFromOpenWeatherResponse(OpenWeatherApiResponseItemModel model)
         {
             DateTime.TryParse(model.TimeStamp, out DateTime timeStamp);
