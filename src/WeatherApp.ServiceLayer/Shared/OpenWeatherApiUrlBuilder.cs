@@ -7,6 +7,7 @@ namespace WeatherApp.ServiceLayer.Shared
         private const string BaseUrl = "https://api.openweathermap.org/data/";
         private string _apiVersion = "2.5";
         private string _endpoint = "forecast";
+        private string _units;
         private string _cityName;
         private string _apiKey;
 
@@ -33,6 +34,13 @@ namespace WeatherApp.ServiceLayer.Shared
                     .Append(_apiKey);
             }
 
+            if (!string.IsNullOrWhiteSpace(_units))
+            {
+                queryStringBuilder
+                    .Append("&units=")
+                    .Append(_units);
+            }
+
             if (queryStringBuilder.Length > 0)
             {
                 queryStringBuilder[0] = '?';
@@ -57,6 +65,12 @@ namespace WeatherApp.ServiceLayer.Shared
         public OpenWeatherApiUrlBuilder WithApiKey(string apiKey)
         {
             _apiKey = apiKey;
+            return this;
+        }
+
+        public OpenWeatherApiUrlBuilder WithUnits(string units)
+        {
+            _units = units;
             return this;
         }
     }

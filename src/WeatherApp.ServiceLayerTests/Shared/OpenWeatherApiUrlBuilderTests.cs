@@ -85,5 +85,20 @@ namespace WeatherApp.ServiceLayerTests.Shared
             // assert
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [TestCase("metric")]
+        [TestCase("standard")]
+        [TestCase("imperial")]
+        public void Build_ShouldReturnCorrectUrl_WhenUnitsAreSet(string units)
+        {
+            // arrange
+            var expected = $"https://api.openweathermap.org/data/2.5/forecast?units={units}";
+
+            // act
+            string actual = _builder.WithUnits(units).Build();
+
+            // assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }
