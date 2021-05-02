@@ -38,11 +38,7 @@ namespace WeatherApp.ServiceLayer
                 .WithUnits("metric")
                 .Build();
 
-            HttpResponseMessage response = await _httpClient.GetAsync(url);
-
-            string json = await response.Content.ReadAsStringAsync();
-
-            List<ForecastData> forecastData = ParseForecastData(json);
+            List<ForecastData> forecastData = await FetchForecastDataFromUrl(url);
 
             return forecastData;
         }
@@ -55,12 +51,18 @@ namespace WeatherApp.ServiceLayer
                 .WithUnits("metric")
                 .Build();
 
+            List<ForecastData> forecastData = await FetchForecastDataFromUrl(url);
+
+            return forecastData;
+        }
+
+        private async Task<List<ForecastData>> FetchForecastDataFromUrl(string url)
+        {
             HttpResponseMessage response = await _httpClient.GetAsync(url);
 
             string json = await response.Content.ReadAsStringAsync();
 
             List<ForecastData> forecastData = ParseForecastData(json);
-
             return forecastData;
         }
 
