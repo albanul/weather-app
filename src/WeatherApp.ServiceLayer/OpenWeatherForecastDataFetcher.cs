@@ -49,7 +49,19 @@ namespace WeatherApp.ServiceLayer
 
         public async Task<IEnumerable<ForecastData>> FetchDataByZipCodeAsync(string zipCode)
         {
-            return await Task.FromResult(Enumerable.Empty<ForecastData>());
+            string url = new OpenWeatherApiUrlBuilder()
+                .WithZipCode(zipCode)
+                .WithApiKey(ApiKey)
+                .WithUnits("metric")
+                .Build();
+
+            HttpResponseMessage response = await _httpClient.GetAsync(url);
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            List<ForecastData> forecastData = ParseForecastData(json);
+
+            return forecastData;
         }
 
         private List<ForecastData> ParseForecastData(string json)

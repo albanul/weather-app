@@ -43,5 +43,18 @@ namespace WeatherApp.ServiceLayerTests
             // assert
             Assert.That(forecastData, Is.Not.Empty);
         }
+
+        [Test]
+        public async Task FetchDataByZipCode_ShouldCorrectlyFetchDataFor80337()
+        {
+            // arrange
+            const string zipCode = "80337";
+
+            // act
+            List<ForecastData> forecastData = (await _fetcher.FetchDataByZipCodeAsync(zipCode)).ToList();
+
+            // assert
+            Assert.That(forecastData, Is.Not.Empty);
+        }
     }
 }
