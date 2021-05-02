@@ -35,6 +35,7 @@ namespace WeatherApp.ServiceLayer
             string url = new OpenWeatherApiUrlBuilder()
                 .WithCityName(cityName)
                 .WithApiKey(ApiKey)
+                .WithUnits("metric")
                 .Build();
 
             HttpResponseMessage response = await _httpClient.GetAsync(url);
