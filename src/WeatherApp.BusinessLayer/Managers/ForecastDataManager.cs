@@ -27,9 +27,12 @@ namespace WeatherApp.BusinessLayer.Managers
             return aggregatedData;
         }
 
-        public Task<IEnumerable<ForecastData>> GetForecastByZipCodeAsync(string cityName)
+        public async Task<IEnumerable<ForecastData>> GetForecastByZipCodeAsync(string zipCode)
         {
-            throw new System.NotImplementedException();
+            IEnumerable<ForecastData> rawData = await _forecastDataFetcher.FetchDataByZipCodeAsync(zipCode);
+            IEnumerable<ForecastData> aggregatedData = _forecastDataAverageByDayAggregator.Aggregate(rawData);
+
+            return aggregatedData;
         }
     }
 }

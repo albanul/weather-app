@@ -47,5 +47,27 @@ namespace WeatherApp.WebApiTests.Controllers
             Assert.That(model, Is.Not.Null);
             Assert.That(model.Items, Is.Not.Empty);
         }
+
+        [Test]
+        public async Task ForecastEndpoint_ShouldReturnData_WhenZipCodeIs80337()
+        {
+            // arrange
+            var factory = new WebApplicationFactory<Startup>();
+            HttpClient client = factory.CreateClient();
+
+            // act
+            HttpResponseMessage response = await client.GetAsync("api/weather/forecast?zipcode=80337");
+
+            // assert
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            var model = JsonSerializer.Deserialize<ForecastDataModel>(json);
+
+            Assert.That(model, Is.Not.Null);
+            Assert.That(model.Items, Is.Not.Empty);
+        }
     }
 }

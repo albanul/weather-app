@@ -25,20 +25,29 @@ namespace WeatherApp.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Forecast(string city)
+        public async Task<IActionResult> Forecast(string city, string zipCode)
         {
             ForecastDataModel model;
 
-            if (string.IsNullOrWhiteSpace(city))
+            if (!string.IsNullOrWhiteSpace(city))
             {
-                model = new ForecastDataModel();
+                List<ForecastData> forecastData =
+                    (await _forecastDataManager.GetForecastByCityNameAsync(city)).ToList();
+
+                model = _forecastDataModelFactory.Create(forecastData);
                 return Ok(model);
             }
 
-            List<ForecastData> forecastData =
-                (await _forecastDataManager.GetForecastByCityNameAsync(city)).ToList();
+            if (!string.IsNullOrWhiteSpace(zipCode))
+            {
+                List<ForecastData> forecastData =
+                    (await _forecastDataManager.GetForecastByZipCodeAsync(zipCode)).ToList();
 
-            model = _forecastDataModelFactory.Create(forecastData);
+                model = _forecastDataModelFactory.Create(forecastData);
+                return Ok(model);
+            }
+
+            model = new ForecastDataModel();
 
             return Ok(model);
         }
