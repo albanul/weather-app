@@ -13,39 +13,13 @@ namespace WeatherApp.ServiceLayer.Shared
 
         public string Build()
         {
+            string queryString = GenerateQueryString();
+
             StringBuilder stringBuilder = new StringBuilder(BaseUrl)
                 .Append(_apiVersion)
                 .Append('/')
-                .Append(_endpoint);
-
-            var queryStringBuilder = new StringBuilder();
-
-            if (!string.IsNullOrWhiteSpace(_cityName))
-            {
-                queryStringBuilder
-                    .Append("&q=")
-                    .Append(_cityName);
-            }
-
-            if (!string.IsNullOrWhiteSpace(_apiKey))
-            {
-                queryStringBuilder
-                    .Append("&appid=")
-                    .Append(_apiKey);
-            }
-
-            if (!string.IsNullOrWhiteSpace(_units))
-            {
-                queryStringBuilder
-                    .Append("&units=")
-                    .Append(_units);
-            }
-
-            if (queryStringBuilder.Length > 0)
-            {
-                queryStringBuilder[0] = '?';
-                stringBuilder.Append(queryStringBuilder);
-            }
+                .Append(_endpoint)
+                .Append(queryString);
 
             return stringBuilder.ToString();
         }
@@ -72,6 +46,51 @@ namespace WeatherApp.ServiceLayer.Shared
         {
             _units = units;
             return this;
+        }
+
+        private string GenerateQueryString()
+        {
+            var queryStringBuilder = new StringBuilder();
+
+            TryAppendCityName(queryStringBuilder);
+            TryAppendApiKey(queryStringBuilder);
+            TryAppendUnits(queryStringBuilder);
+            HandleFirstSymbol(queryStringBuilder);
+
+            return queryStringBuilder.ToString();
+        }
+
+        private void TryAppendCityName(StringBuilder queryStringBuilder)
+        {
+            TryAppendValue(queryStringBuilder, "q", _cityName);
+        }
+
+        private void TryAppendApiKey(StringBuilder queryStringBuilder)
+        {
+            TryAppendValue(queryStringBuilder, "appid", _apiKey);
+        }
+
+        private void TryAppendUnits(StringBuilder queryStringBuilder)
+        {
+            TryAppendValue(queryStringBuilder, "units", _units);
+        }
+
+        private void TryAppendValue(StringBuilder queryStringBuilder, string key, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                queryStringBuilder
+                    .Append($"&{key}=")
+                    .Append(value);
+            }
+        }
+
+        private static void HandleFirstSymbol(StringBuilder queryStringBuilder)
+        {
+            if (queryStringBuilder.Length > 0)
+            {
+                queryStringBuilder[0] = '?';
+            }
         }
     }
 }
