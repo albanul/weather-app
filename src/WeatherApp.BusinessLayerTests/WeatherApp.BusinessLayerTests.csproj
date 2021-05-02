@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Moq" Version="4.16.1" />
         <PackageReference Include="NUnit" Version="3.12.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
@@ -15,10 +16,6 @@
     <ItemGroup>
       <ProjectReference Include="..\WeatherApp.BusinessLayer\WeatherApp.BusinessLayer.csproj" />
       <ProjectReference Include="..\WeatherApp.Testing\WeatherApp.Testing.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Managers" />
     </ItemGroup>
 
 </Project>

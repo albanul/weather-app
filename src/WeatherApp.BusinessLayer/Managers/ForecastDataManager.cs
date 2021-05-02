@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
 using WeatherApp.BusinessLayer.Interfaces.ServiceLayer;
@@ -21,7 +23,17 @@ namespace WeatherApp.BusinessLayer.Managers
 
         public async Task<IEnumerable<ForecastData>> GetForecastByCityNameAsync(string cityName)
         {
-            IEnumerable<ForecastData> rawData = await _forecastDataFetcher.FetchDataByCityNameAsync(cityName);
+            IEnumerable<ForecastData> rawData;
+
+            try
+            {
+                rawData = await _forecastDataFetcher.FetchDataByCityNameAsync(cityName);
+            }
+            catch (Exception)
+            {
+                rawData = Enumerable.Empty<ForecastData>();
+            }
+
             IEnumerable<ForecastData> aggregatedData = _forecastDataAverageByDayAggregator.Aggregate(rawData);
 
             return aggregatedData;
@@ -29,7 +41,17 @@ namespace WeatherApp.BusinessLayer.Managers
 
         public async Task<IEnumerable<ForecastData>> GetForecastByZipCodeAsync(string zipCode)
         {
-            IEnumerable<ForecastData> rawData = await _forecastDataFetcher.FetchDataByZipCodeAsync(zipCode);
+            IEnumerable<ForecastData> rawData;
+
+            try
+            {
+                rawData = await _forecastDataFetcher.FetchDataByZipCodeAsync(zipCode);
+            }
+            catch (Exception)
+            {
+                rawData = Enumerable.Empty<ForecastData>();
+            }
+
             IEnumerable<ForecastData> aggregatedData = _forecastDataAverageByDayAggregator.Aggregate(rawData);
 
             return aggregatedData;
