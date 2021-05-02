@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
 using WeatherApp.BusinessLayer.Shared;
 using WeatherApp.WebApi.Models;
+using WeatherApp.WebApi.Models.Factories;
 
 namespace WeatherApp.WebApi.Controllers
 {
@@ -13,28 +14,31 @@ namespace WeatherApp.WebApi.Controllers
     public class WeatherController : Controller
     {
         private readonly IForecastDataManager _forecastDataManager;
+        private readonly IForecastDataModelFactory _forecastDataModelFactory;
 
-        public WeatherController(IForecastDataManager forecastDataManager)
+        public WeatherController(
+            IForecastDataManager forecastDataManager,
+            IForecastDataModelFactory forecastDataModelFactory)
         {
             _forecastDataManager = forecastDataManager;
+            _forecastDataModelFactory = forecastDataModelFactory;
         }
 
         [HttpGet]
         public async Task<IActionResult> Forecast(string city)
         {
+            ForecastDataModel model;
+
+            if (string.IsNullOrWhiteSpace(city))
+            {
+                model = new ForecastDataModel();
+                return Ok(model);
+            }
+
             List<ForecastData> forecastData =
                 (await _forecastDataManager.GetForecastByCityNameAsync(city)).ToList();
 
-            var model = new ForecastDataModel
-            {
-                Items = forecastData.Select(x => new ForecastDataItemModel
-                {
-                    Humidity = x.Humidity,
-                    Temperature = x.Temperature,
-                    WindSpeed = x.WindSpeed,
-                    TimeStamp = x.TimeStamp
-                })
-            };
+            model = _forecastDataModelFactory.Create(forecastData);
 
             return Ok(model);
         }

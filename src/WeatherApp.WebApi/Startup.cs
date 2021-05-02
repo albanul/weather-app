@@ -8,6 +8,7 @@ using WeatherApp.BusinessLayer.Interfaces.ServiceLayer;
 using WeatherApp.BusinessLayer.Managers;
 using WeatherApp.ServiceLayer;
 using WeatherApp.ServiceLayer.Factories;
+using WeatherApp.WebApi.Models.Factories;
 using WeatherApp.WebApi.Shared;
 
 namespace WeatherApp.WebApi
@@ -20,6 +21,9 @@ namespace WeatherApp.WebApi
         {
             services.AddControllers();
             services.AddHttpClient();
+
+            // Web
+            services.AddTransient<IForecastDataModelFactory, ForecastDataModelFactory>();
 
             // BL
             services.AddTransient<IAppSettingsManager, AppSettingsManager>();
