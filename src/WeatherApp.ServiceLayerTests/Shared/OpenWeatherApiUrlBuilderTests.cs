@@ -100,5 +100,20 @@ namespace WeatherApp.ServiceLayerTests.Shared
             // assert
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [TestCase("80337")]
+        [TestCase("80336")]
+        [TestCase("80335")]
+        public void Build_ShouldReturnCorrectUrl_WhenZipCodeIsSet(string zipCode)
+        {
+            // arrange
+            var expected = $"https://api.openweathermap.org/data/2.5/forecast?zip={zipCode},de";
+
+            // act
+            string actual = _builder.WithZipCode(zipCode).Build();
+
+            // assert
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace WeatherApp.ServiceLayer.Shared
         private string _units;
         private string _cityName;
         private string _apiKey;
+        private string _zipCode;
 
         public string Build()
         {
@@ -48,11 +49,18 @@ namespace WeatherApp.ServiceLayer.Shared
             return this;
         }
 
+        public OpenWeatherApiUrlBuilder WithZipCode(string zipCode)
+        {
+            _zipCode = zipCode;
+            return this;
+        }
+
         private string GenerateQueryString()
         {
             var queryStringBuilder = new StringBuilder();
 
             TryAppendCityName(queryStringBuilder);
+            TryAppendZipCode(queryStringBuilder);
             TryAppendApiKey(queryStringBuilder);
             TryAppendUnits(queryStringBuilder);
             HandleFirstSymbol(queryStringBuilder);
@@ -63,6 +71,17 @@ namespace WeatherApp.ServiceLayer.Shared
         private void TryAppendCityName(StringBuilder queryStringBuilder)
         {
             TryAppendValue(queryStringBuilder, "q", _cityName);
+        }
+
+        private void TryAppendZipCode(StringBuilder queryStringBuilder)
+        {
+            if (!string.IsNullOrWhiteSpace(_zipCode))
+            {
+                queryStringBuilder
+                    .Append("&zip=")
+                    .Append(_zipCode)
+                    .Append(",de");
+            }
         }
 
         private void TryAppendApiKey(StringBuilder queryStringBuilder)
