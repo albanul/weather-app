@@ -14,4 +14,15 @@
       <ProjectReference Include="..\WeatherApp.ServiceLayer\WeatherApp.ServiceLayer.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\css\chunk-vendors.bacda1d7.css" />
+      <None Include="wwwroot\favicon.ico" />
+      <None Include="wwwroot\img\weather-app.e5fb8c5a.png" />
+      <None Include="wwwroot\index.html" />
+      <None Include="wwwroot\js\app.4f121295.js" />
+      <None Include="wwwroot\js\app.4f121295.js.map" />
+      <None Include="wwwroot\js\chunk-vendors.b4ced7d1.js" />
+      <None Include="wwwroot\js\chunk-vendors.b4ced7d1.js.map" />
+    </ItemGroup>
+
 </Project>
