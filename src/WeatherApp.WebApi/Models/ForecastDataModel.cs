@@ -11,6 +11,12 @@ namespace WeatherApp.WebApi.Models
             Items = Enumerable.Empty<ForecastDataItemModel>();
         }
 
+        [JsonPropertyName("cityName")]
+        public string CityName { get; set; }
+
+        [JsonPropertyName("zipCode")]
+        public string ZipCode { get; set; }
+
         [JsonPropertyName("items")]
         public IEnumerable<ForecastDataItemModel> Items { get; set; }
     }

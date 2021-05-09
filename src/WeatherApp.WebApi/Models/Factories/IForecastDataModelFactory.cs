@@ -5,6 +5,6 @@ namespace WeatherApp.WebApi.Models.Factories
 {
     public interface IForecastDataModelFactory
     {
-        ForecastDataModel Create(IEnumerable<ForecastData> forecastData);
+        ForecastDataModel Create(string cityName, string zipCode, IEnumerable<ForecastData> forecastData);
     }
 }

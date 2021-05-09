@@ -34,7 +34,7 @@ namespace WeatherApp.WebApi.Controllers
                 List<ForecastData> forecastData =
                     (await _forecastDataManager.GetForecastByCityNameAsync(city)).ToList();
 
-                model = _forecastDataModelFactory.Create(forecastData);
+                model = _forecastDataModelFactory.Create(city, zipCode, forecastData);
                 return Ok(model);
             }
 
@@ -43,7 +43,7 @@ namespace WeatherApp.WebApi.Controllers
                 List<ForecastData> forecastData =
                     (await _forecastDataManager.GetForecastByZipCodeAsync(zipCode)).ToList();
 
-                model = _forecastDataModelFactory.Create(forecastData);
+                model = _forecastDataModelFactory.Create(city, zipCode, forecastData);
                 return Ok(model);
             }
 

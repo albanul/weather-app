@@ -23,7 +23,7 @@ namespace WeatherApp.WebApiTests.Models.Factories
         public void Create_ShouldReturnEmptyObject_WhenParameterIsNull()
         {
             // act
-            ForecastDataModel actual = _factory.Create(null);
+            ForecastDataModel actual = _factory.Create(null, null, null);
 
             // assert
             Assert.That(actual, Is.Not.Null);
@@ -51,7 +51,7 @@ namespace WeatherApp.WebApiTests.Models.Factories
             };
 
             // act
-            ForecastDataModel actual = _factory.Create(input);
+            ForecastDataModel actual = _factory.Create(null, null, input);
 
             // assert
             Assert.That(actual, Is.Not.Null);
@@ -75,7 +75,7 @@ namespace WeatherApp.WebApiTests.Models.Factories
             {
                 Humidity = value,
                 Temperature = value,
-                TimeStamp = timestamp,
+                Date = timestamp,
                 WindSpeed = value
             };
         }

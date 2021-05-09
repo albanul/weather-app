@@ -13,12 +13,12 @@ namespace WeatherApp.Testing.EqualityComparers
             if (ReferenceEquals(y, null)) return false;
             if (x.GetType() != y.GetType()) return false;
             return x.Temperature.Equals(y.Temperature) && x.Humidity.Equals(y.Humidity) &&
-                   x.WindSpeed.Equals(y.WindSpeed) && x.TimeStamp.Equals(y.TimeStamp);
+                   x.WindSpeed.Equals(y.WindSpeed) && x.Date.Equals(y.Date);
         }
 
         public int GetHashCode(ForecastDataItemModel obj)
         {
-            return HashCode.Combine(obj.Temperature, obj.Humidity, obj.WindSpeed, obj.TimeStamp);
+            return HashCode.Combine(obj.Temperature, obj.Humidity, obj.WindSpeed, obj.Date);
         }
     }
 }

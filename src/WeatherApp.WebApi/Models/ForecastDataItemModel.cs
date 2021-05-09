@@ -14,7 +14,7 @@ namespace WeatherApp.WebApi.Models
         [JsonPropertyName("windSpeed")]
         public double WindSpeed { get; set; }
 
-        [JsonPropertyName("timeStamp")]
-        public DateTime TimeStamp { get; set; }
+        [JsonPropertyName("date")]
+        public DateTime Date { get; set; }
     }
 }

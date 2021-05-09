@@ -6,7 +6,7 @@ namespace WeatherApp.WebApi.Models.Factories
 {
     public class ForecastDataModelFactory : IForecastDataModelFactory
     {
-        public ForecastDataModel Create(IEnumerable<ForecastData> forecastData)
+        public ForecastDataModel Create(string cityName, string zipCode, IEnumerable<ForecastData> forecastData)
         {
             if (forecastData == null)
             {
@@ -15,12 +15,14 @@ namespace WeatherApp.WebApi.Models.Factories
 
             return new ForecastDataModel
             {
+                CityName = cityName,
+                ZipCode = zipCode,
                 Items = forecastData.Select(x => new ForecastDataItemModel
                 {
                     Humidity = x.Humidity,
                     Temperature = x.Temperature,
                     WindSpeed = x.WindSpeed,
-                    TimeStamp = x.TimeStamp
+                    Date = x.TimeStamp
                 })
             };
         }
