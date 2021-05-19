@@ -19,13 +19,23 @@ namespace WeatherApp.BusinessLayer.Factories
 
         public string CreateToken()
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Value.Key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+            string mySecret = _jwtOptions.Value.Key;
+            var mySecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(mySecret));
 
-            var token = new JwtSecurityToken(_jwtOptions.Value.Issuer, expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: credentials);
+            string myIssuer = _jwtOptions.Value.Issuer;
+            string myAudience = _jwtOptions.Value.Audience;
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Expires = DateTime.UtcNow.AddHours(1),
+                Issuer = myIssuer,
+                Audience = myAudience,
+                SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

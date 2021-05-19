@@ -46,18 +46,28 @@ namespace WeatherApp.WebApi
             services.AddControllers();
             services.AddHttpClient();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters
+            services.AddAuthentication(options =>
                 {
-                    ValidateIssuer = true,
-                    // TODO ALBA: think about that
-                    // ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = _configuration["Jwt:Issuer"],
-                    // TODO ALBA: think about that
-                    // ValidAudience = _configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    string issuer = _configuration["Jwt:Issuer"];
+                    string audience = _configuration["Jwt:Audience"];
+                    string key = _configuration["Jwt:Key"];
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = issuer,
+                        ValidAudience = audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+                    };
                 });
 
             // Web
@@ -90,6 +100,7 @@ namespace WeatherApp.WebApi
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
