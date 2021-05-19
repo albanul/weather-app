@@ -32,7 +32,7 @@ namespace WeatherApp.ServiceLayerTests.Shared
         public void Build_ShouldReturnCorrectUrl_WhenApiVersionIsDifferent(string apiVersion)
         {
             // arrange
-            var expected = $"https://api.openweathermap.org/data/{apiVersion}/forecast";
+            string expected = $"https://api.openweathermap.org/data/{apiVersion}/forecast";
 
             // act
             string actual = _builder.WithApiVersion(apiVersion).Build();
@@ -77,7 +77,7 @@ namespace WeatherApp.ServiceLayerTests.Shared
         public void Build_ShouldReturnCorrectUrl_WhenBothCityAndApiKeyAreSet(string cityName, string apiKey)
         {
             // arrange
-            var expected = $"https://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={apiKey}";
+            string expected = $"https://api.openweathermap.org/data/2.5/forecast?q={cityName}&appid={apiKey}";
 
             // act
             string actual = _builder.WithCityName(cityName).WithApiKey(apiKey).Build();
@@ -92,7 +92,7 @@ namespace WeatherApp.ServiceLayerTests.Shared
         public void Build_ShouldReturnCorrectUrl_WhenUnitsAreSet(string units)
         {
             // arrange
-            var expected = $"https://api.openweathermap.org/data/2.5/forecast?units={units}";
+            string expected = $"https://api.openweathermap.org/data/2.5/forecast?units={units}";
 
             // act
             string actual = _builder.WithUnits(units).Build();
@@ -107,7 +107,7 @@ namespace WeatherApp.ServiceLayerTests.Shared
         public void Build_ShouldReturnCorrectUrl_WhenZipCodeIsSet(string zipCode)
         {
             // arrange
-            var expected = $"https://api.openweathermap.org/data/2.5/forecast?zip={zipCode},de";
+            string expected = $"https://api.openweathermap.org/data/2.5/forecast?zip={zipCode},de";
 
             // act
             string actual = _builder.WithZipCode(zipCode).Build();

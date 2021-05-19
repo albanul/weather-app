@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
 using WeatherApp.BusinessLayer.Shared;
@@ -10,6 +11,7 @@ using WeatherApp.WebApi.Models.Factories;
 namespace WeatherApp.WebApi.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]/[action]")]
     public class WeatherController : Controller
     {
