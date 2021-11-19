@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.BusinessLayer.Interfaces.BusinessLayer;
@@ -6,8 +7,9 @@ using WeatherApp.WebApi.Models;
 
 namespace WeatherApp.WebApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class LoginController : ControllerBase
+    public class LoginController : Controller
     {
         private readonly ILoginManager _loginManager;
 
@@ -18,7 +20,7 @@ namespace WeatherApp.WebApi.Controllers
 
         [HttpPost("")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] UserModel userModel)
+        public IActionResult Login([FromBody] [Required] UserModel userModel)
         {
             if (userModel == null)
             {
